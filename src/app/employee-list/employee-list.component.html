@@ -1,0 +1,21 @@
+<!-- Table -->
+<table class="table">
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Level</td>
+      <td></td>
+    </tr>
+  </thead>
+  @for(emp of employees(); track emp.id) {
+    <tr>
+      <td>{{emp.name}}</td>
+      <td>{{emp.level | level}}</td>
+      <td>
+        <button (click)="onEditClick(emp)">Edit</button>
+        <button (click)="onDeleteClick(emp)">Delete</button>
+        <button (click)="onDetailsClick(emp)">Details</button>
+      </td>
+    </tr>
+  }
+</table>

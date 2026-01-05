@@ -1,0 +1,12 @@
+<h1>{{title + '!'}}</h1>
+<app-employee></app-employee>
+<p>Age: {{age +10 }}</p>
+<p>{{theValue}}</p>
+<input #myInput (input)="onEdit(myInput.value)" [type]="inputType"/>
+<button (click)="toggleInputType()">toggleInputType</button>
+val = {{counter}}
+<button (click)="increment()">incr</button>
+<button (click)="decrement()">decr</button>
+<div [class]="msgClass">Messages ...</div>
+<button (click)="changeColor('success')">Success</button>
+<button (click)="changeColor('error')">Error</button>

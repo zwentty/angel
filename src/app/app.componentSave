@@ -1,0 +1,48 @@
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { TestComponent } from './test/test.component';
+import { EmployeeComponent } from './employee/employee.component';
+
+@Component({
+  selector: 'app-root',
+  //template: `toto`,
+  imports: [EmployeeComponent],
+  templateUrl: './app.component.html',
+  //styles: [`.success{ color: green; }`]
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'My first app';
+  age = 30;
+  counter =  0;
+  theValue = '';
+
+  msgClass: 'success' | 'error' = 'success';
+  
+  inputType: 'password' | 'text' = 'password';
+  toggleInputType(){
+    if(this.inputType === 'password'){
+      this.inputType = 'text';
+    } else {
+      this.inputType = 'password';
+    }
+  }
+
+  changeColor(style: 'success' | 'error'){
+    this.msgClass = style;
+  }
+
+
+  onEdit(value: string) {
+    this.theValue = value;
+  }
+
+  increment() {
+    this.counter++;
+    console.log(this.counter);
+  }
+  
+  decrement() {
+    this.counter--;
+  }
+}
