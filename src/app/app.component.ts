@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Employee } from './models/employee.model';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeListComponent } from './components/smart/employee-list/employee-list.component';
+import { EmployeeService } from './services/employee.service';
+import { EmployeeComponent } from './components/ui/employee/employee.component';
 
 @Component({
   selector: 'app-root',
@@ -13,43 +14,25 @@ import { EmployeeComponent } from './employee/employee.component';
 })
 export class AppComponent {
 
-  employees: Employee[] = [
-    {
-      "id": "1t23",
-      "name": "John Doe",
-      "department": "IT",
-      "level": "M"
-    },
-    {
-      "id": "4r56",
-      "name": "Jane Smith",
-      "department": "HR",
-      "level": "S"
-    },
-    {
-      "id": "7y89",
-      "name": "Alice Johnson",
-      "department": "Marketing",
-      "level": "J"
-    },
-    {
-      "id": "0p12",
-      "name": "Bob Brown",
-      "department": "IT",
-      "level": "M"
-    }
-  ];
+  employees: Employee[] = [];
 
   currentEmployee: null | Employee = null;
 
+  employeeService = inject(EmployeeService);
+
+  constructor() {
+    this.employees = this.employeeService.getEmployees();
+  }
+
   showDetails(employeeId: string) {
-    this.currentEmployee = this.employees.find(e => e.id === employeeId) || null;
+    this.currentEmployee = this.employeeService.getEmployee(employeeId) ;
   }
   onEdit(employeeId: string) {
     console.log('Edit employee with ID:', employeeId);
   }
   onDelete(employeeId: string) {
-    this.employees = this.employees.filter(e => e.id !== employeeId);
+    this.employeeService.deletEpmloyeeById(employeeId);
+    this.employees = this.employeeService.getEmployees();
     this.currentEmployee = null;
   }
 }
